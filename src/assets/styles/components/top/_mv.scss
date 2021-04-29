@@ -1,0 +1,38 @@
+.mv {
+    $parent: &;
+    padding: get_per(50) 0;
+    opacity: 1;
+    z-index: 10;
+    &.is-active {
+        opacity: 1;
+    }
+    @include mq-mobile() {
+        padding: get_per(183) 0 get_per(280);
+    }
+    &__titles {
+        display: block;
+        position: relative;
+        z-index: 2;
+    }
+    &__title {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        padding: get_per(18) 0 get_per(52);
+        width: get_per(438);
+        transform: translate(-50%);
+        @include scroll-fadein-before(-50%, 60px);
+        #{$parent}.is-active & {
+            @include scroll-fadein-after(-50%, 0, 1.5s);
+        }
+        @include mq-mobile() {
+            padding: get_per(8) 0 get_per(37);
+            width: get_per(328);
+        }
+        @include mq-mobile() {
+            .sp-class &__title {
+                top: 0;
+            }
+        }
+    }
+}
