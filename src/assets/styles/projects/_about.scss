@@ -1,0 +1,173 @@
+@use '../global/index' as g;
+
+.p-about {
+    $about: &;
+    @include g.media('>phone') {
+        margin: g.get-per(162) 0 0;
+    }
+    @include g.media('<=phone') {
+        margin: g.get-per(170) 0 0;
+    }
+    &__inner {
+        position: relative;
+        width: 100%;
+    }
+    &__title {
+        position: relative;
+        margin: 0 auto;
+        @include g.media('>phone') {
+            width: g.get-per(853);
+        }
+        @include g.media('<=phone') {
+            width: g.get-per(628);
+        }
+        @include g.scroll-fade-in-before;
+        &.is-active {
+            @include g.scroll-fade-in-after;
+        }
+    }
+    &__images {
+        display: flex;
+        align-items: flex-end;
+        width: 100%;
+        @include g.media('>phone') {
+            margin: g.get-per(118) 0 0;
+            padding: 0 0 0 g.get-per(520);
+        }
+        @include g.media('<=phone') {
+            margin: g.get-per(68) 0 0;
+            padding: 0 0 0 g.get-per(20);
+        }
+    }
+    &__products {
+        @include g.media('>phone') {
+            width: g.get-per(245, 1400);
+        }
+        @include g.media('<=phone') {
+            width: g.get-per(200, 730);
+        }
+        @include g.before-fade-in;
+        #{$about}__images.is-active & {
+            @include g.after-fade-in;
+        }
+    }
+    &__plus {
+        position: relative;
+        @include g.media('>phone') {
+            margin: 0 g.get-per(26, 1400) g.get-per(103, 1400) g.get-per(23, 1400);
+            width: g.get-per(42, 1400);
+        }
+        @include g.media('<=phone') {
+            margin: 0 g.get-per(13, 730) g.get-per(87, 730) g.get-per(10, 730);
+            width: g.get-per(35, 730);
+        }
+        @include g.before-fade-in;
+        #{$about}__images.is-active & {
+            @include g.after-fade-in(0.5s);
+        }
+    }
+    &__vinegar {
+        @include g.media('>phone') {
+            width: g.get-per(133, 1400);
+        }
+        @include g.media('<=phone') {
+            width: g.get-per(110, 730);
+        }
+        @include g.before-fade-in;
+        #{$about}__images.is-active & {
+            @include g.after-fade-in(0.8s);
+        }
+    }
+    &__equal {
+        @include g.media('>phone') {
+            margin: 0 g.get-per(28, 1400) g.get-per(114, 1400) g.get-per(32, 1400);
+            width: g.get-per(42, 1400);
+        }
+        @include g.media('<=phone') {
+            margin: 0 g.get-per(17, 730) g.get-per(97, 730) g.get-per(26, 730);
+            width: g.get-per(34, 730);
+        }
+        @include g.before-fade-in;
+        #{$about}__images.is-active & {
+            @include g.after-fade-in(1.1s);
+        }
+    }
+    &__drink {
+        position: relative;
+        @include g.media('>phone') {
+            width: g.get-per(284, 1400);
+        }
+        @include g.media('<=phone') {
+            width: g.get-per(229, 730);
+        }
+        @include g.scroll-bounce-before;
+        #{$about}__images.is-active & {
+            @include g.scroll-bounce-after(1.35s);
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            background-image: url(../../images/pc/glitter.png);
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            @include g.media('>phone') {
+                right: g.get-per(-40, 284);
+                bottom: 0;
+                width: g.get-per(393, 284);
+                height: g.get-per(344, 284);
+            }
+            @include g.media('<=phone') {
+                right: g.get-per(-26, 229);
+                bottom: 0;
+                width: g.get-per(309, 229);
+                height: g.get-per(270, 229);
+            }
+        }
+    }
+    &__heading {
+        @include g.media('>phone') {
+            margin: g.get-per(30) auto 0;
+            width: g.get-per(1053);
+        }
+        @include g.media('<=phone') {
+            margin: g.get-per(84) auto 0;
+            width: g.get-per(629);
+        }
+        @include g.scroll-fade-in-before;
+        &.is-active {
+            @include g.scroll-fade-in-after;
+        }
+    }
+    &__text {
+        color: g.$color-congo-brown;
+        line-height: 2;
+        font-weight: bold;
+        text-align: center;
+        font-feature-settings: 'palt';
+        @include g.media('>phone') {
+            margin: g.strip-lh-fluid(25, 12px, 30px, 2) 0 0;
+            @include g.fluid-type(font-size, 12px, 30px);
+        }
+        @include g.media('<=phone') {
+            margin: g.strip-lh(46, 2.6rem, 2) 0 0;
+            font-size: 2.6rem;
+        }
+        @include g.scroll-fade-in-before;
+        #{$about}__heading.is-active ~ & {
+            @include g.scroll-fade-in-after;
+        }
+    }
+    &__back-text {
+        @include g.media('>phone') {
+            position: absolute;
+            top: g.get-vw(-98);
+            right: 0;
+            width: g.get-per(402);
+            z-index: -1;
+        }
+        @include g.media('<=phone') {
+            display: none;
+        }
+    }
+}

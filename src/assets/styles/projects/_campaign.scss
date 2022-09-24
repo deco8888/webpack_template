@@ -1,0 +1,86 @@
+@use '../global/index' as g;
+
+.p-campaign {
+    $campaign: &;
+    @include g.media('>phone') {
+        margin: g.get-per(-140) 0 0;
+    }
+    @include g.media('<=phone') {
+        margin: g.get-per(45) 0 0;
+    }
+    &__inner {
+        position: relative;
+        width: 100%;
+    }
+    &__title {
+        position: relative;
+        margin: 0 auto;
+        @include g.media('>phone') {
+            width: g.get-per(987);
+        }
+        @include g.media('<=phone') {
+            width: g.get-per(717);
+        }
+        @include g.scroll-fade-in-before;
+        #{$campaign}.is-active &.is-active {
+            @include g.scroll-fade-in-after;
+        }
+    }
+    &__button {
+        display: block;
+        @include g.media('>phone') {
+            margin: g.get-per(78) auto 0;
+            width: g.get-per(732);
+        }
+        @include g.media('<=phone') {
+            margin: g.get-per(74) auto 0;
+            width: g.get-per(689);
+        }
+        @include g.before-scale-change;
+        @include g.hover-only {
+            @include g.after-scale-change;
+        }
+        & img {
+            @include g.scroll-fade-in-before;
+        }
+        #{$campaign}.is-active &.is-active {
+            & img {
+                @include g.scroll-fade-in-after;
+            }
+        }
+    }
+    &__illust {
+        position: absolute;
+        z-index: -1;
+        &--illust1 {
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+            opacity: 0;
+            transition: opacity 0.8s g.ease(OutSine) 0.3s;
+            @include g.media('>phone') {
+                top: 3%;
+                left: 0;
+                width: g.get-per(491);
+            }
+            @include g.media('<=phone') {
+                top: -8rem;
+                left: 0;
+                width: g.get-per(257);
+            }
+            #{$campaign}.is-active &.is-active {
+                animation: paint-to-right 0.9s g.ease(OutQuad) 0.3s forwards;
+                opacity: 1;
+            }
+        }
+        &--illust2 {
+            @include g.media('>phone') {
+                display: none;
+            }
+            @include g.media('<=phone') {
+                margin: 1rem 0 0;
+                right: g.get-per(10);
+                width: g.get-per(251);
+            }
+            @include g.illust-paint-to-left;
+        }
+    }
+}

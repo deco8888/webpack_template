@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('prettier').Config} */
+const config = {
     printWidth: 120, // 自動折返し文字数
     tabWidth: 4, // インデントレベルごとにタブサイズを指定
     useTabs: false, // タブの代わりにスペースでインデント
@@ -15,3 +16,4 @@ module.exports = {
         },
     ],
 };
+module.exports = config;

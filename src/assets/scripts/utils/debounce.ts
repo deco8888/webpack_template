@@ -9,6 +9,7 @@ export function debounce<F extends Args>(
     return function (this: ThisParameterType<F>, ...args: Parameters<F>): void {
         // debounce関数ががinterval秒内で複数呼び出されても、都度clearTimeout → 最後の1回だけ実行
         clearTimeout(timerId);
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const context = this;
         timerId = setTimeout((): void => {
             fn.apply(context, args);

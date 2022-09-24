@@ -1,146 +1,64 @@
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
+@use '../global/index' as g;
 
 html {
     font-size: 62.5%;
     height: 100%;
+    scroll-behavior: smooth;
+    @include g.media('>tablet') {
+        font-size: 62.5%;
+    }
+    @include g.media('<=tablet', '>phone') {
+        font-size: 62.5%;
+    }
+    @include g.media('<=phone') {
+        font-size: calc(100vw / var(--base-size) * 10);
+    }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 body {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    color: $color-black;
-    font-family: '游ゴシック', 'Yu Gothic', '游ゴシック体', 'YuGothic', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, 'Helvetica Neue', 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'MS Pゴシック',
-        'MS PGothic', sans-serif;
-    font-size: 1.6em;
-    font-stretch: normal;
-    font-style: normal;
+    font-family: g.$font-family-default;
+    color: g.$color-black;
+    font-size: 1.6rem;
     font-weight: 400;
-    line-height: normal;
-    text-align: left;
+    letter-spacing: normal;
+    background-repeat: no-repeat; // ブラウザーは速さや位置の正確さよりも、読みやすさを強調
+    text-rendering: optimizeLegibility; // サブピクセルではなく、ピクセルレベルでフォントを滑らかにする
+    -webkit-font-smoothing: antialiased; // サブピクセルではなくグレースケールのアンチエイリアスで、テキストを描画
+    -moz-osx-font-smoothing: grayscale;
+    word-break: break-all;
     word-spacing: 1px;
-    box-sizing: border-box;
-    // フォントの種類の違いによるサイズのバラつきを調整
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    // フォントのアンチエイリアスを調節
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch !important;
-    // プリント時に背景色・背景画像の表示を強制
-    // exact: 要素の背景色・背景画像を強制的にプリント
-    -webkit-print-color-adjust: exact;
-    --scroll-behavior: smooth;
-    scroll-behavior: smooth;
-    @include mq-mobile() {
-        min-width: 320px;
-    }
-    &.is-hidden {
-        overflow: hidden;
-    }
-
-    /**********************************
-    *
-    * header footer
-    *
-    **********************************/
-    header {
-        background-color: $color-white;
-        border-bottom: solid 1px #dcdcdc;
-        &.is-hidden {
-            visibility: hidden;
-        }
-        a {
-            font-size: 0;
-        }
-    }
-    footer {
-        border-top: solid 1px #dcdcdc;
-        padding: 30px 0 0;
-    }
-    /**********************************
-    *
-    * pankuzu
-    *
-    **********************************/
-    #pankuzu {
-        background-color: #f7f4ee;
-        width: 100%;
-        padding: 8px 0;
-        margin: 0;
-        z-index: 1;
-    }
-
-    #pankuzu li {
-        float: left;
-        position: relative;
-        margin-right: 40px;
-        line-height: 1;
-        font-size: 11px;
-        border-radius: 2px;
-        padding: 5px 10px;
-        text-align: center;
-        background: $color-white;
-        color: #6c5b52;
-    }
-
-    #pankuzu li.link {
-        background: #669219;
-        border-radius: 2px;
-    }
-
-    #pankuzu li a {
-        display: block;
-        width: 100%;
-        color: $color-white;
-        text-decoration: none;
-        padding: 0;
-    }
-
-    #pankuzu li::after {
-        content: '';
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        border: 2px solid;
-        border-color: transparent transparent #669219 #669219;
-        transform: rotate(225deg);
-        position: absolute;
-        right: -22px;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-    }
-    #pankuzu li:last-child {
-        @include mq-mobile() {
-            padding: 5px 10px;
-        }
-    }
-
-    #pankuzu li:last-child::after {
-        content: none;
-    }
-}
-
-.app {
-    position: relative;
     width: 100%;
-    height: 100%;
+    margin: 0;
     overflow-x: hidden;
+    &.is-hidden {
+        visibility: hidden;
+    }
 
     section {
         position: relative;
         width: 100%;
+        z-index: 1;
+        @include g.media('>phone') {
+            scroll-margin-top: 86px;
+        }
+        @include g.media('<=phone') {
+            scroll-margin-top: 42px;
+        }
     }
 
     img {
         display: block;
         width: 100%;
         height: auto;
+        image-rendering: auto;
     }
 
     ul {
@@ -150,18 +68,136 @@ body {
     a {
         text-decoration: none;
     }
+
+    &::-webkit-scrollbar {
+        width: 1rem;
+        -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: #a3ca0f;
+        box-shadow: none;
+    }
+    &::-webkit-scrollbar-track {
+        background: g.$color-concrete;
+        border: none;
+        border-radius: 1rem;
+    }
+
+    /**********************************
+    *
+    * header footer
+    *
+    **********************************/
+    header {
+        background-color: g.$color-white;
+        border-bottom: solid 1px g.$color-gainsboro;
+        &.is-hidden {
+            visibility: hidden;
+        }
+        a {
+            font-size: 0;
+        }
+    }
+    footer {
+        border-top: solid 1px g.$color-gainsboro;
+        padding: 30px 0 0;
+    }
+}
+
+.app {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    background-position: top left;
+    background-repeat: repeat-y;
+    background-size: cover;
+    @include g.media('>phone') {
+        background-image: url(../../images/pc/pc_bg.png);
+    }
+    @include g.media('<=phone') {
+        background-image: url(../../images/sp/sp_bg.png);
+    }
 }
 
 .pc-class {
     display: block;
-    @include mq-mobile {
+    @include g.mq(mobile) {
         display: none;
     }
 }
 
 .sp-class {
     display: none;
-    @include mq-mobile {
+    @include g.mq(mobile) {
         display: block;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/**********************************
+*
+* pankuzu
+*
+**********************************/
+#pankuzu {
+    background-color: g.$color-old-lace;
+    width: 100%;
+    padding: 8px 0;
+    margin: 0;
+    z-index: 1;
+    & li {
+        float: left;
+        position: relative;
+        margin-right: 40px;
+        line-height: 1;
+        font-size: 11px;
+        border-radius: 2px;
+        padding: 5px 10px;
+        text-align: center;
+        background: g.$color-white;
+        color: g.$color-dorado;
+        &.link {
+            background: g.$color-olive-drab;
+            border-radius: 2px;
+        }
+        & a {
+            display: block;
+            width: 100%;
+            color: g.$color-white;
+            text-decoration: none;
+            padding: 0;
+        }
+        &::after {
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border: 2px solid;
+            border-color: transparent transparent g.$color-olive-drab g.$color-olive-drab;
+            transform: rotate(225deg);
+            position: absolute;
+            right: -22px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        &:last-child {
+            @include g.mq(mobile) {
+                padding: 5px 10px;
+            }
+        }
+        &:last-child::after {
+            content: none;
+        }
     }
 }

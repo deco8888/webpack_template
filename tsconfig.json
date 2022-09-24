@@ -1,29 +1,49 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "ESNext",
-        // tscのモジュール解決の方法を指定
-        "moduleResolution": "Node",
-        "lib": [
-            "ESNext",
-            "ESNext.AsyncIterable",
-            "DOM"
-        ],
-        "esModuleInterop": true,
-        "allowJs": true,
-        "sourceMap": true,
-        "strict": false,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "experimentalDecorators": true,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true,
-        "types": [
-            "@types/node"
-        ]
+  "compilerOptions": {
+    // どのバージョンのJS向けに出力するか指定
+    "target": "ES2021",
+    // 出力されるJSがどのようにモジュールを読み込むか指定
+    "module": "ESNext",
+    // 「import React from "react";」のようなインポートが可能になる
+    "allowSyntheticDefaultImports": true,
+    // モジュール解決の方法を’node’（Node.js）または’classic’（TypeScript pre-1.6）から設定
+    "moduleResolution": "Node",
+    // jsonファイルをimportして型解決した状態で値を取得できる
+    "resolveJsonModule": true,
+    // 使いたいtargetには使いたい機能がない場合に、以下で指定
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    // *.d.ts に対して型チェックしない
+    "skipLibCheck": true,
+    // プロパティ数が多い場合でも全ての型情報を確認
+    "noErrorTruncation": true,
+    // CommonJSモジュールを実行可能とする
+    "esModuleInterop": true,
+    // .ts、.tsxファイルだけでなく、JSファイルをプロジェクトへインポートできるようにする
+    "allowJs": true,
+    // ソースマップファイルの生成を有効化
+    "sourceMap": true,
+    // 厳格チェック
+    "strict": true,
+    // 暗黙的にanyになる値をエラーにする
+    "noImplicitAny": true,
+    // 使われているthisの型が暗黙的にanyになる場合にエラーにする
+    "noImplicitThis": true,
+    // デコレータの実験的なサポートを有効にする
+    "experimentalDecorators": true,
+    // TypeScriptの型を実行時に保持する
+    "emitDecoratorMetadata": true,
+    // import時にファイルパスの文字列で大文字小文字を区別するかどうかを指定
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
     },
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+    "types": ["@types/node"]
+  },
+  "compileOnSave": true,
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

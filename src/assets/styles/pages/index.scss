@@ -1,4 +1,9 @@
-@import '../app';
-@import '../components/top/loading';
-@import '../components/top/mv';
-@import '~swiper/swiper-bundle'
+@use '../app';
+
+@use '../components/underline';
+
+@use '../projects/mv';
+@use '../projects/campaign';
+@use '../projects/about';
+@use '../projects/message';
+@use '../projects/howto';

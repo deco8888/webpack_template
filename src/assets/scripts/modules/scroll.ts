@@ -1,27 +1,30 @@
 require('intersection-observer');
+import { addClass } from '../utils/classList';
+import { hasClass } from '../utils/hasClass';
 
 interface ScrollOptions {
     /**
      * target selector
      */
     selectors: string;
+    root?: Element | Document | null;
+    rootMargin?: string;
+    threshold?: number | number[];
 }
 
 const defaults: ScrollOptions = {
-    selectors: '[data-role="scroll"]',
+    selectors: '[data-scroll]',
+    root: null,
+    rootMargin: '0px 0px -25% 0px',
+    threshold: 0,
 };
 
 export class Scroll {
     params: ScrollOptions;
-    threshold: number | number[];
     targets: NodeListOf<HTMLElement>;
-    addClass: string;
-
-    constructor(props: ScrollOptions) {
-        this.params = props;
-        this.threshold = [0.2];
+    constructor(props: Partial<ScrollOptions> = {}) {
+        this.params = { ...defaults, ...props };
         this.targets = null;
-        this.addClass = 'is-active';
         this.init();
     }
     init(): void {
@@ -32,12 +35,14 @@ export class Scroll {
     }
     setScrollAnim(): void {
         const options: IntersectionObserverInit = {
-            threshold: this.threshold,
+            root: this.params.root,
+            rootMargin: this.params.rootMargin,
+            threshold: this.params.threshold,
         };
         const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
             entries.forEach((entry: IntersectionObserverEntry) => {
-                if (entry.intersectionRatio >= this.threshold) {
-                    entry.target.classList.add(this.addClass);
+                if (entry.isIntersecting) {
+                    addClass(entry.target, hasClass.active);
                     observer.unobserve(entry.target);
                 }
             });
