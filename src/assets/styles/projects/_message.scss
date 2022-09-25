@@ -17,7 +17,7 @@
         position: relative;
         margin: 0 auto;
         background-color: g.$color-white;
-        box-shadow: 0px 9px 16px 0 rgb(94 56 39 / 30%);
+        box-shadow: 0 9px 16px rgb(94 56 39 / 30%);
         @include g.media('>phone') {
             padding: g.get-per(188) 0 g.strip-lh-fluid(81, 12px, 30px, 2);
             width: g.get-per(1116);

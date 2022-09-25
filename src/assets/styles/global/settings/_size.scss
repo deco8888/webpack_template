@@ -6,6 +6,7 @@ $sp-base-size: 750;
 $min-vw: 768px;
 $max-vw: 1920px;
 
+/* stylelint-disable annotation-no-unknown */
 $breakpoints: (
     'phone': 768px,
     'mobile': 768px,
@@ -14,7 +15,7 @@ $breakpoints: (
     'tablet': 1100px,
     'pc': 1600px,
     'desktop': 1920px,
-    /* stylelint-disable-next-line annotation-no-unknown */
 ) !default;
+/* stylelint-enable annotation-no-unknown */
 
 @forward '~include-media/dist/_include-media.scss' with($breakpoints: $breakpoints);

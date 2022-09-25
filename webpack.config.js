@@ -8,7 +8,6 @@ const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // webpackで生成したJSやCSSを埋め込んだHTMLを生成する
 // css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // cssファイルを個別のファイルに抽出、cssを含むjsファイルごとにcssファイルを生成
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // CSSを最小化する(「optimize-css-assets-webpack-plugin」の代わり)
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // buildフォルダをクリーンアップさせる
 const StylelintPlugin = require('stylelint-webpack-plugin'); // stylelintをwebpackで使う際に必要
 // js
@@ -257,10 +256,6 @@ const webpackConfig = {
                 parallel: true,
                 // コメントを除くかどうか
                 extractComments: false,
-            }),
-            // CSS用のminifyプラグイン（production modeでのみ、CSSの最適化が有効）
-            new CssMinimizerPlugin({
-                parallel: true,
             }),
         ],
         // 複数のエントリーポイント間で利用している共通モジュールをバンドルしたファイルを出力するための設定

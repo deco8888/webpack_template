@@ -19,8 +19,8 @@
 @function strip-lh($size, $font-size-list, $line-height-list, $parent: var(--base-size)) {
     $num: 0;
     @each $line-height in $line-height-list {
-        $key: index($line-height-list, $line-height);
-        $num: $num + nth($font-size-list, $key) * math.div($line-height - 1, 2);
+        $key: list.index($line-height-list, $line-height);
+        $num: $num + list.nth($font-size-list, $key) * math.div($line-height - 1, 2);
     }
     @return calc((#{$size} / #{$parent} * 100%) - #{$num});
 }
@@ -29,8 +29,8 @@
     $rate: math.div(100, $base);
     $num: 0;
     @each $line-height in $line-height-list {
-        $key: index($line-height-list, $line-height);
-        $font-size: nth($font-size-list, $key);
+        $key: list.index($line-height-list, $line-height);
+        $font-size: list.nth($font-size-list, $key);
         $num: $num + ($rate * $font-size * 1vw) * math.div($line-height - 1, 2);
     }
     @return calc((#{$size} / #{$parent} * 100%) - #{$num});
