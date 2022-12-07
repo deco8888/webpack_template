@@ -175,9 +175,6 @@ const webpackConfig = {
                             sourceMap: isDev,
                         },
                     },
-                    {
-                        loader: 'import-glob-loader',
-                    },
                 ],
             },
             // stylesheetで読み込んでいる画像を出力フォルダにコピー
